@@ -32,7 +32,7 @@ import cryptoTrader.utils.DataVisualizationCreator;
 
 public class MainUI extends JFrame implements ActionListener {
 	/**
-	 * 
+	 * hello world
 	 */
 	private static final long serialVersionUID = 1L;
 
