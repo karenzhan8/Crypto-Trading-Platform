@@ -70,10 +70,10 @@ public class MainUI extends JFrame implements ActionListener {
 
 
 		JPanel north = new JPanel();
-
+//
 //		north.add(strategyList);
-
-		// Set bottom bar
+//
+//		// Set bottom bar
 //		JLabel from = new JLabel("From");
 //		UtilDateModel dateModel = new UtilDateModel();
 //		Properties p = new Properties();
@@ -182,37 +182,37 @@ public class MainUI extends JFrame implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		String command = e.getActionCommand();
-		if ("refresh".equals(command)) {
+		if ("refresh".equals(command)) { // after perform trade, then start getting each selection broker
 			for (int count = 0; count < dtm.getRowCount(); count++){
-					Object traderObject = dtm.getValueAt(count, 0);
+					Object traderObject = dtm.getValueAt(count, 0); 
 					if (traderObject == null) {
 						JOptionPane.showMessageDialog(this, "please fill in Trader name on line " + (count + 1) );
 						return;
-					}
-					String traderName = traderObject.toString();
-					Object coinObject = dtm.getValueAt(count, 1);
+					} // CHECK HERE IF NAME MATCHES A PREVIOUS BROKER NAME
+					String traderName = traderObject.toString(); // traderName string
+					Object coinObject = dtm.getValueAt(count, 1); 
 					if (coinObject == null) {
 						JOptionPane.showMessageDialog(this, "please fill in cryptocoin list on line " + (count + 1) );
 						return;
 					}
-					String[] coinNames = coinObject.toString().split(",");
+					String[] coinNames = coinObject.toString().split(","); // list of coins
 					Object strategyObject = dtm.getValueAt(count, 2);
 					if (strategyObject == null) {
 						JOptionPane.showMessageDialog(this, "please fill in strategy name on line " + (count + 1) );
 						return;
 					}
-					String strategyName = strategyObject.toString();
-					System.out.println(traderName + " " + Arrays.toString(coinNames) + " " + strategyName);
+					String strategyName = strategyObject.toString(); // strategy name string
+					System.out.println(traderName + " " + Arrays.toString(coinNames) + " " + strategyName); // could use here to make selection object
 	        }
 			stats.removeAll();
 			DataVisualizationCreator creator = new DataVisualizationCreator();
 			creator.createCharts();
 		} else if ("addTableRow".equals(command)) {
-			dtm.addRow(new String[3]);
+			dtm.addRow(new String[3]); 
 		} else if ("remTableRow".equals(command)) {
 			int selectedRow = table.getSelectedRow();
 			if (selectedRow != -1)
-				dtm.removeRow(selectedRow);
+				dtm.removeRow(selectedRow); // connect to remove the selected row data from here (THIS IS PERFORMED AFTER TRADE BUTTON HIT)
 		}
 	}
 
