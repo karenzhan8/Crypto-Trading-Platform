@@ -31,12 +31,12 @@ import cryptoTrader.gui.MainUI;
 
 public class DataVisualizationCreator {
 	
-	public void createCharts() {
+	public void createCharts(List<List<String>> barList) {
 //		createTextualOutput();
 		createTableOutput();
 //		createTimeSeries();
 //		createScatter();
-		createBar();
+		createBar(barList);
 	}
 
 	private void createTextualOutput() {
