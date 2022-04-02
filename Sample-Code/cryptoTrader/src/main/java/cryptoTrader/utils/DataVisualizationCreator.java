@@ -196,16 +196,14 @@ public class DataVisualizationCreator {
 		MainUI.getInstance().updateStats(chartPanel);
 	}
 	
-	private void createBar() {
+	public void createBar(List<List<String>> strategyFrequencies) {
 		
 		DefaultCategoryDataset dataset = new DefaultCategoryDataset();
-//		Those are hard-coded values!!!! 
-//		You will have to come up with a proper datastructure to populate the BarChart with live data!
-		dataset.setValue(6, "Trader-1", "Strategy-A");
-		dataset.setValue(5, "Trader-2", "Strategy-B");
-		dataset.setValue(0, "Trader-3", "Strategy-E");
-		dataset.setValue(1, "Trader-4", "Strategy-C");
-		dataset.setValue(10, "Trader-5", "Strategy-D");
+		
+		for (int i=0; i < strategyFrequencies.size(); i++) {
+			List<String> tradeItem = strategyFrequencies.get(i);
+			dataset.setValue(tradeItem.get(0), tradeItem.get(1), tradeItem.get(2));
+		};
 
 		CategoryPlot plot = new CategoryPlot();
 		BarRenderer barrenderer1 = new BarRenderer();
@@ -215,7 +213,7 @@ public class DataVisualizationCreator {
 		CategoryAxis domainAxis = new CategoryAxis("Strategy");
 		plot.setDomainAxis(domainAxis);
 		LogAxis rangeAxis = new LogAxis("Actions(Buys or Sells)");
-		rangeAxis.setRange(new Range(1.0, 20.0));
+		rangeAxis.setRange(new Range(0.1, 20.0));
 		plot.setRangeAxis(rangeAxis);
 
 		//plot.mapDatasetToRangeAxis(0, 0);// 1st dataset to 1st y-axis
