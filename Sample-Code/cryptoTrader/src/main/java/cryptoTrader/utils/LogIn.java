@@ -11,8 +11,7 @@ public class LogIn {
 			String[] curr = {"hello", "world"};
 			
 			while (input.hasNextLine()) {
-				curr = input.nextLine().split(" ");
-				
+				curr = input.nextLine().split(" ");				
 				if (curr[0].equals(user) && curr[1].equals(pass)) {
 					return true;
 				}
@@ -20,7 +19,8 @@ public class LogIn {
 			return false;	
 		} 
 		catch (FileNotFoundException e) {
+			System.out.println("error");
 			return false;
 		}
-	}	
+	}
 }
