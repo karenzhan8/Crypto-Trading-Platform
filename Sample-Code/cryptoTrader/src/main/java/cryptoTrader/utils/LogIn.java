@@ -19,7 +19,6 @@ public class LogIn {
 			return false;	
 		} 
 		catch (FileNotFoundException e) {
-			System.out.println("error");
 			return false;
 		}
 	}
