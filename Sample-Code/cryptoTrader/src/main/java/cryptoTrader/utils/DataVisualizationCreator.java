@@ -58,9 +58,9 @@ public class DataVisualizationCreator {
 	
 	private void createTableOutput(List<List<String>> tradeActions) {
 		// Dummy dates for demo purposes. These should come from selection menu
-		Object[] columnNames = {"Trader","Strategy","CryptoCoin","Action","Quantity","Price","Date"};
+		Object[] columnNames = {"Trader","Strategy","Action", "CryptoCoin","Quantity","Price","Date"};
 		
-		// tradeActions format: {trader name, strategy, coin, action, quantity, price, date}
+		// tradeActions format: {trader name, strategy, action, coin, quantity, price, date}
 		String[][] data = new String[tradeActions.size()][7];
 		for (int i=0; i < data.length; i++) {
 			List<String> currLine = tradeActions.get(i);
