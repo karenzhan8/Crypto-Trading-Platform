@@ -60,7 +60,7 @@ public class DataFetcher {
 			JsonObject currentPrice = marketData.get("market_cap").getAsJsonObject();
 			marketCap = currentPrice.get("cad").getAsDouble();
 		}
-		
+
 		return marketCap;
 	}
 	
@@ -75,16 +75,5 @@ public class DataFetcher {
 		}
 		
 		return volume;
-	}
-	
-	public static void main(String[] args) {
-		DataFetcher fetcher = new DataFetcher();
-		double price = fetcher.getPriceForCoin("BTC", "08-09-2021");
-		double marketCap = fetcher.getMarketCapForCoin("BTC", "08-09-2021");
-		double volume = fetcher.getVolumeForCoin("BTC", "08-09-2021");
-		
-		System.out.println("Bitcoin=>\tPrice: " + price + 
-								"\n\t\tMarket Cap: " + marketCap + 
-								"\n\t\tVolume: "+volume);
 	}
 }
