@@ -19,15 +19,29 @@ public class TradeStrategy {
 		}
 		
 		if(strategy.equals("Strategy-A")) {
-			TradeExecution = StrategyA(coins, prices);
+			List<String> tradeActionInfo = StrategyA(coins, prices);
+			for (int i=0; i < tradeActionInfo.size(); i++) {
+				TradeExecution.add(tradeActionInfo.get(i));
+			};
 		} else if(strategy.equals("Strategy-B")) {
-			TradeExecution = StrategyB(coins, prices);
+			List<String> tradeActionInfo = StrategyB(coins, prices);
+			for (int i=0; i < tradeActionInfo.size(); i++) {
+				TradeExecution.add(tradeActionInfo.get(i));
+			};
 		} else if(strategy.equals("Strategy-C")) {
-			TradeExecution = StrategyC(coins, prices);
+			List<String> tradeActionInfo = StrategyC(coins, prices);
+			for (int i=0; i < tradeActionInfo.size(); i++) {
+				TradeExecution.add(tradeActionInfo.get(i));
+			};
 		} else if(strategy.equals("Strategy-D")) {
-			TradeExecution = StrategyD(coins, prices);
+			List<String> tradeActionInfo = StrategyD(coins, prices);
+			for (int i=0; i < tradeActionInfo.size(); i++) {
+				TradeExecution.add(tradeActionInfo.get(i));
+			};
 		}
-		
+	
+		TradeExecution.add(date());
+	// final format of TradeExecution: {name, strategy, action, coin, quantity, price}	
 		return TradeExecution;
 	}
 	
