@@ -1,4 +1,4 @@
-package main.java.cryptoTrader.utils;
+package cryptoTrader.utils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,7 +12,7 @@ import java.util.List;
  */
 public class ExecuteTrade {
 
-	List<String[]> cumulativeTrades = new ArrayList<String[]>();
+	List<List<String>> cumulativeTrades = new ArrayList<List<String>>();
 	TradeStrategy trader = new TradeStrategy(); // used to perform trades
 	UserSelection traderList = new UserSelection();
 	
@@ -26,7 +26,7 @@ public class ExecuteTrade {
 		
 	}
 	
-	public List<String[]> getCumulativeTrades () {
+	public List<List<String>> getCumulativeTrades () {
 		
 		return cumulativeTrades;
 		
