@@ -235,7 +235,10 @@ public class MainUI extends JFrame implements ActionListener {
 			DataVisualizationCreator creator = new DataVisualizationCreator();
 			creator.createCharts();
 		} else if ("addTableRow".equals(command)) {
-			dtm.addRow(new String[3]); 
+			String[] coinList = {Coin.getText()};
+			String[] newRow = {Name.getText(), Coin.getText(), Strategy.getText()};
+			brokerDatabase.addBroker(newRow[0], newRow[2], coinList);
+			dtm.addRow(newRow); 
 		} else if ("remTableRow".equals(command)) {
 			int selectedRow = table.getSelectedRow();
 			if (selectedRow != -1)
