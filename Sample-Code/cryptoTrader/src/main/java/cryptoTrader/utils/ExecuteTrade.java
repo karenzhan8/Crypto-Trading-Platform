@@ -14,10 +14,15 @@ public class ExecuteTrade {
 
 	List<String[]> cumulativeTrades = new ArrayList<String[]>();
 	TradeStrategy trader = new TradeStrategy(); // used to perform trades
+	UserSelection traderList = new UserSelection();
 	
+	// executes one round of trading, iterating through each broker and updating cumulative trades for each buy/sell action performed
 	public void executeTrade(String strategy, String[] coins, String name) {
 		
-		cumulativeTrades.add(trader.getExecution(strategy, coins, name));
+		for (int i=0; i < traderList.getNumBrokers(); i++) {
+			Broker currBroker = traderList.getBrokerList().get(i);
+			cumulativeTrades.add(trader.getExecution(currBroker.getStrategy(), currBroker.getCoinList(), currBroker.getName()));
+		};
 		
 	}
 	
