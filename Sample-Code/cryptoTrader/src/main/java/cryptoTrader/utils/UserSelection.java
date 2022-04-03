@@ -15,9 +15,11 @@ public class UserSelection {
 		numBrokers = 0;
 	}
 	
-	public void addBroker(Broker name, String strategy, String[] coinList) {
+	public void addBroker(String name, String strategy, String[] coinList) {
 		if (!brokerList.contains(name)) { //if broker is not in list yet
-			brokerList.add(name);
+			Broker newBroker = new Broker(name, strategy, coinList);
+			
+			brokerList.add(newBroker);
 			strategyList.add(strategy);
 			numBrokers++;
 	        coinsList.add(coinList);
