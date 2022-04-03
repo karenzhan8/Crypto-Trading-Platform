@@ -159,17 +159,27 @@ public class MainUI extends JFrame implements ActionListener {
 //		east.add(table);
 		east.add(scrollPane);
 		
+		JLabel lblNewLabel = new JLabel("Enter Broker Name:");
+		east.add(lblNewLabel);
+		
 		Name = new JTextField();
 		east.add(Name);
 		Name.setColumns(10);
+		
+		JLabel lblNewLabel_1 = new JLabel("Enter Coin(s):");
+		east.add(lblNewLabel_1);
 		
 		Coin = new JTextField();
 		east.add(Coin);
 		Coin.setColumns(10);
 		
+		JLabel lblNewLabel_2 = new JLabel("Enter Strategy:");
+		east.add(lblNewLabel_2);
+		
 		Strategy = new JTextField();
 		east.add(Strategy);
 		Strategy.setColumns(10);
+		Strategy.setText("Strategy-");
 		
 		JPanel buttons = new JPanel();
 		buttons.setLayout(new BoxLayout(buttons, BoxLayout.X_AXIS));
@@ -231,11 +241,12 @@ public class MainUI extends JFrame implements ActionListener {
 					String strategyName = strategyObject.toString(); // strategy name string
 					System.out.println(traderName + " " + Arrays.toString(coinNames) + " " + strategyName); // could use here to make selection object
 	        }
+			cumulativeTrades.performTrade(brokerDatabase);
 			stats.removeAll();
 			DataVisualizationCreator creator = new DataVisualizationCreator();
-			creator.createCharts();
+			creator.createCharts(cumulativeTrades.getCumulativeTrades(), histoList);
 		} else if ("addTableRow".equals(command)) {
-			String[] coinList = {Coin.getText()};
+			String[] coinList = Coin.getText().split(",");
 			String[] newRow = {Name.getText(), Coin.getText(), Strategy.getText()};
 			brokerDatabase.addBroker(newRow[0], newRow[2], coinList);
 			dtm.addRow(newRow); 
