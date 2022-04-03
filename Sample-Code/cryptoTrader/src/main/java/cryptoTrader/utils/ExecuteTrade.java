@@ -12,16 +12,20 @@ import java.util.List;
  */
 public class ExecuteTrade {
 
-	List<List<String>> cumulativeTrades = new ArrayList<List<String>>();
+	List<List<String>> cumulativeTrades = new ArrayList<List<String>>(); // stores list of cumulative trading history for log table
+	
+	List<List<String>> strategyFrequencies = new ArrayList<List<String>>(); // breaks down each strategies frequencies for histogram
+	
+	
 	TradeStrategy trader = new TradeStrategy(); // used to perform trades
-	UserSelection traderList = new UserSelection();
 	
 	// executes one round of trading, iterating through each broker and updating cumulative trades for each buy/sell action performed
-	public void performTrade(String strategy, String[] coins, String name) {
+	public void performTrade(UserSelection traderList) {
 		
 		for (int i=0; i < traderList.getNumBrokers(); i++) {
 			Broker currBroker = traderList.getBrokerList().get(i);
 			cumulativeTrades.add(trader.getExecution(currBroker.getStrategy(), currBroker.getCoinList(), currBroker.getName()));
+	// format of getExecution: {name, strategy, action, coin, quantity, price}
 		};
 		
 	}
