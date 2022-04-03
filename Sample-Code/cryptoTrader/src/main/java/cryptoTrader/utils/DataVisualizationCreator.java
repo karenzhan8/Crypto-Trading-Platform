@@ -95,13 +95,13 @@ public class DataVisualizationCreator {
 		MainUI.getInstance().updateStats(scrollPane);
 	}
 	
-	public void createBar(List<List<String>> strategyFrequencies) {
+	public void createBar(List<String[]> strategyFrequencies) {
 		
 		DefaultCategoryDataset dataset = new DefaultCategoryDataset();
 		
 		for (int i=0; i < strategyFrequencies.size(); i++) {
-			List<String> tradeItem = strategyFrequencies.get(i);
-			dataset.setValue(tradeItem.get(0), tradeItem.get(1), tradeItem.get(2));
+			String[] tradeItem = strategyFrequencies.get(i);
+			dataset.setValue(tradeItem[0], tradeItem[1], tradeItem[2]);
 		};
 
 		CategoryPlot plot = new CategoryPlot();
