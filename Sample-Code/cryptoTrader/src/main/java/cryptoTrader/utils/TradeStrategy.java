@@ -21,11 +21,11 @@ public class TradeStrategy {
 		if(strategy.equals("Strategy-A")) {
 			TradeExecution = StrategyA(coins, prices);
 		} else if(strategy.equals("Strategy-B")) {
-			
+			TradeExecution = StrategyB(coins, prices);
 		} else if(strategy.equals("Strategy-C")) {
-			
+			TradeExecution = StrategyC(coins, prices);
 		} else if(strategy.equals("Strategy-D")) {
-			
+			TradeExecution = StrategyD(coins, prices);
 		}
 		
 		return TradeExecution;

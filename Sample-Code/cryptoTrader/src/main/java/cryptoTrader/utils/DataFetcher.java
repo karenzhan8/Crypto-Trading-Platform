@@ -60,7 +60,7 @@ public class DataFetcher {
 			JsonObject currentPrice = marketData.get("market_cap").getAsJsonObject();
 			marketCap = currentPrice.get("cad").getAsDouble();
 		}
-
+		
 		return marketCap;
 	}
 	
