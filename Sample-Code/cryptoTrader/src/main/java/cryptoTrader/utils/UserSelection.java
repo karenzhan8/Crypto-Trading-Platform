@@ -6,17 +6,20 @@ public class UserSelection {
 	private ArrayList<Broker> brokerList;
 	private ArrayList<String> strategyList;
 	private ArrayList<String[]> coinsList;
+	private int numBrokers;
 	
 	public UserSelection() {
         brokerList = new ArrayList<Broker>(); 
 		strategyList = new ArrayList<String>();
 		coinsList = new ArrayList<String[]>();
+		numBrokers = 0;
 	}
 	
 	public void addBroker(Broker name, String strategy, String[] coinList) {
 		if (!brokerList.contains(name)) { //if broker is not in list yet
 			brokerList.add(name);
 			strategyList.add(strategy);
+			numBrokers++;
 	        coinsList.add(coinList);
 		} else {
 			System.out.println("Broker already in list");
@@ -29,7 +32,7 @@ public class UserSelection {
 			strategyList.remove(index);
 			coinsList.remove(index);
 			brokerList.remove(index);
-			
+			numBrokers--;
 		} else {
 			System.out.println("Broker not in list");
 		}
@@ -45,4 +48,9 @@ public class UserSelection {
     public ArrayList<String[]> getCoinLists() {
         return coinsList;
     }
+	
+    public int getNumBrokers() {
+	    return numBrokers;
+    }    
+	    
 }
