@@ -29,6 +29,12 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
 
 import cryptoTrader.utils.DataVisualizationCreator;
+import cryptoTrader.utils.ExecuteTrade;
+import cryptoTrader.utils.UserSelection;
+
+import javax.swing.JTextField;
+
+import cryptoTrader.utils.DataVisualizationCreator;
 
 public class MainUI extends JFrame implements ActionListener {
 	/**
@@ -53,6 +59,14 @@ public class MainUI extends JFrame implements ActionListener {
 	private String selectedStrategy = "";
 	private DefaultTableModel dtm;
 	private JTable table;
+	private JTextField Name;
+	private JTextField Coin;
+	private JTextField Strategy;
+	
+	// stores database of brokers
+	UserSelection brokerDatabase = new UserSelection();
+	// stores list of cumulative trades
+	ExecuteTrade cumulativeTrades = new ExecuteTrade();
 
 	public static MainUI getInstance() {
 		if (instance == null)
@@ -144,6 +158,19 @@ public class MainUI extends JFrame implements ActionListener {
 		east.setLayout(new BoxLayout(east, BoxLayout.Y_AXIS));
 //		east.add(table);
 		east.add(scrollPane);
+		
+		Name = new JTextField();
+		east.add(Name);
+		Name.setColumns(10);
+		
+		Coin = new JTextField();
+		east.add(Coin);
+		Coin.setColumns(10);
+		
+		Strategy = new JTextField();
+		east.add(Strategy);
+		Strategy.setColumns(10);
+		
 		JPanel buttons = new JPanel();
 		buttons.setLayout(new BoxLayout(buttons, BoxLayout.X_AXIS));
 		buttons.add(addRow);
