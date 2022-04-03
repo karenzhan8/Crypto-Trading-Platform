@@ -32,33 +32,12 @@ import cryptoTrader.gui.MainUI;
 
 public class DataVisualizationCreator {
 	
-	public void createCharts() {
+	public void createCharts(List<List<String>> tableData, List<List<String>> histogramData) {
+	
+	
+		createTableOutput(tableData);
+		createBar(histogramData);
 		
-		ExecuteTrade cumTrades = new ExecuteTrade();
-		
-		List<String[]> dataList = cumTrades.getCumulativeTrades();
-		createTableOutput(dataList);
-		createBar(dataList);
-	}
-
-
-	private void createTextualOutput() {
-//		DefaultTableModel dtm = new  DefaultTableModel(new Object[] {"Broker Name", "Ticker List", "Strategy Name"}, 1);
-//		JTable table = new JTable(dtm);
-//		//table.setPreferredSize(new Dimension(600, 300));
-//		dtm.e
-//		JScrollPane scrollPane = new JScrollPane(table);
-//		scrollPane.setBorder (BorderFactory.createTitledBorder (BorderFactory.createEtchedBorder (),
-//                "Broker Actions",
-//                TitledBorder.CENTER,
-//                TitledBorder.TOP));
-//		
-//	
-//		
-//		scrollPane.setPreferredSize(new Dimension(800, 300));
-//		table.setFillsViewportHeight(true);;
-		
-//		MainUI.getInstance().updateStats(scrollPane);
 	}
 	
 	private void createTableOutput(List<List<String>> tradeActions) {
@@ -66,18 +45,18 @@ public class DataVisualizationCreator {
 		Object[] columnNames = {"Trader","Strategy","Action", "CryptoCoin","Quantity","Price","Date"};
 		
 		// tradeActions format: {trader name, strategy, action, coin, quantity, price, date}
-		String[][] data = new String[tradeActions.size()][7];
-		for (int i=0; i < data.length; i++) {
-			String[] currLine = tradeActions.get(i);
-			data[i][0] = currLine[0];
-			data[i][1] = currLine[1];
-			data[i][2] = currLine[2];
-			data[i][3] = currLine[3];
-			data[i][4] = currLine[4];
-			data[i][5] = currLine[5];
-			data[i][6] = currLine[6];
-		};
 		
+		Object[][] data = new Object[tradeActions.size()][7];
+		for (int i=0; i < data.length; i++) {
+			List<String> currLine = tradeActions.get(i);
+			data[i][0] = currLine.get(0);
+			data[i][1] = currLine.get(1);
+			data[i][2] = currLine.get(2);
+			data[i][3] = currLine.get(3);
+			data[i][4] = currLine.get(4);
+			data[i][5] = currLine.get(5);
+			data[i][6] = currLine.get(6);
+		};
 
 		JTable table = new JTable(data, columnNames);
 		//table.setPreferredSize(new Dimension(600, 300));
@@ -96,15 +75,17 @@ public class DataVisualizationCreator {
 		MainUI.getInstance().updateStats(scrollPane);
 	}
 	
-	public void createBar(List<String[]> strategyFrequencies) {
+	public void createBar(List<List<String>> strategyFrequencies) {
+		
+		// strategyFrequenciesFormat: {{frequency, trader, strategy}, ...}
 		
 		DefaultCategoryDataset dataset = new DefaultCategoryDataset();
-		
+	
 		for (int i=0; i < strategyFrequencies.size(); i++) {
-			String[] tradeItem = strategyFrequencies.get(i);
-			dataset.setValue(tradeItem[0], tradeItem[1], tradeItem[2]);
+			List<String> tradeItem = strategyFrequencies.get(i);
+			dataset.setValue(Integer.parseInt(tradeItem.get(0)), tradeItem.get(1), tradeItem.get(2));
 		};
-
+		
 		CategoryPlot plot = new CategoryPlot();
 		BarRenderer barrenderer1 = new BarRenderer();
 
