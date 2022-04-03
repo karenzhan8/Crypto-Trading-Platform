@@ -31,11 +31,15 @@ import cryptoTrader.gui.MainUI;
 
 public class DataVisualizationCreator {
 	
-	public void createCharts(List<List<String>> tableList, List<List<String>> barList) {
-//		createTextualOutput();
-		createTableOutput(tableList);
-		createBar(barList);
+	public void createCharts() {
+		
+		ExecuteTrade cumTrades = new ExecuteTrade();
+		
+		List<String[]> dataList = cumTrades.getCumulativeTrades();
+		createTableOutput(dataList);
+		createBar(dataList);
 	}
+
 
 	private void createTextualOutput() {
 //		DefaultTableModel dtm = new  DefaultTableModel(new Object[] {"Broker Name", "Ticker List", "Strategy Name"}, 1);
@@ -63,14 +67,14 @@ public class DataVisualizationCreator {
 		// tradeActions format: {trader name, strategy, action, coin, quantity, price, date}
 		String[][] data = new String[tradeActions.size()][7];
 		for (int i=0; i < data.length; i++) {
-			List<String> currLine = tradeActions.get(i);
-			data[i][0] = currLine.get(0);
-			data[i][1] = currLine.get(1);
-			data[i][2] = currLine.get(2);
-			data[i][3] = currLine.get(3);
-			data[i][4] = currLine.get(4);
-			data[i][5] = currLine.get(5);
-			data[i][6] = currLine.get(6);
+			String[] currLine = tradeActions.get(i);
+			data[i][0] = currLine[0];
+			data[i][1] = currLine[1];
+			data[i][2] = currLine[2];
+			data[i][3] = currLine[3];
+			data[i][4] = currLine[4];
+			data[i][5] = currLine[5];
+			data[i][6] = currLine[6];
 		};
 		
 
