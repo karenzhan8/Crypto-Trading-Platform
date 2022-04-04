@@ -36,6 +36,7 @@ import utils.LogIn;
 import utils.UserSelection;
 
 import javax.swing.JTextField;
+import javax.swing.JLabel;
 
 import utils.DataVisualizationCreator;
 
@@ -290,8 +291,9 @@ public class MainUI extends JFrame implements ActionListener {
 			dtm.addRow(newRow); 
 		} else if ("remTableRow".equals(command)) {
 			int selectedRow = table.getSelectedRow();
-			if (selectedRow != -1)
+			if (selectedRow != -1) {
 				dtm.removeRow(selectedRow); // connect to remove the selected row data from here (THIS IS PERFORMED AFTER TRADE BUTTON HIT)
+			}
 		} else if ("login".equals(command)) {
 			LogIn database = new LogIn();
 			
