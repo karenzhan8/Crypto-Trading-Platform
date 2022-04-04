@@ -314,7 +314,6 @@ public class MainUI extends JFrame implements ActionListener {
  		//	creator.createCharts(cumulativeTrades.getCumulativeTrades());
 		} else if ("addTableRow".equals(command)) {
 			dtm.addRow(new String[3]); 
-			dtm.addRow(newRow); 
 		} else if ("remTableRow".equals(command)) {
 			int selectedRow = table.getSelectedRow();
 			if (selectedRow != -1) {
