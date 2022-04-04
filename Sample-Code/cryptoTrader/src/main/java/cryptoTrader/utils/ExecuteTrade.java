@@ -24,8 +24,15 @@ public class ExecuteTrade {
 		
 		for (int i=0; i < traderList.getNumBrokers(); i++) {
 			Broker currBroker = traderList.getBrokerList().get(i);
-			cumulativeTrades.add(trader.getExecution(currBroker.getStrategy(), currBroker.getCoinList(), currBroker.getName()));
 	// format of getExecution: {name, strategy, action, coin, quantity, price}
+			List<String> tradeResult = trader.getExecution(currBroker.getStrategy(), currBroker.getCoinList(), currBroker.getName());
+			if (tradeResult.size() == 7) {
+				// size == 7 means that a buy/sell action was actually enacted
+				cumulativeTrades.add(tradeResult);
+			};
+			
+		// info needed for histogram: int frequency, String trader name, String strategy
+		// POPULATE HISTROGRAM DATA HERE (or somewhere else, but i think this'd be a good place)
 		};
 		
 	}
