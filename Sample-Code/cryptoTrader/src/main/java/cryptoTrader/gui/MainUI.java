@@ -1,4 +1,4 @@
-package cryptoTrader.gui;
+package gui;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
@@ -22,6 +22,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JPasswordField;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextArea;
@@ -29,13 +30,14 @@ import javax.swing.border.TitledBorder;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
 
-import cryptoTrader.utils.DataVisualizationCreator;
-import cryptoTrader.utils.ExecuteTrade;
-import cryptoTrader.utils.UserSelection;
+import utils.DataVisualizationCreator;
+import utils.ExecuteTrade;
+import utils.LogIn;
+import utils.UserSelection;
 
 import javax.swing.JTextField;
 
-import cryptoTrader.utils.DataVisualizationCreator;
+import utils.DataVisualizationCreator;
 
 public class MainUI extends JFrame implements ActionListener {
 	/**
@@ -64,6 +66,11 @@ public class MainUI extends JFrame implements ActionListener {
 	private JTextField Coin;
 	private JTextField Strategy;
 	
+	private static JLabel passwordLabel, label;
+	private static JTextField username;
+	private static JPasswordField password;
+	private static JButton button;
+	
 	// stores database of brokers
 	UserSelection brokerDatabase = new UserSelection();
 	// stores list of cumulative trades
@@ -83,8 +90,40 @@ public class MainUI extends JFrame implements ActionListener {
 
 		// Set top bar
 
-
 		JPanel north = new JPanel();
+		
+		//facilitate log in and verifying credentials
+		JPanel panel = new JPanel();
+		panel.setLayout(null);
+		
+		JFrame frame = new JFrame();
+		frame.setTitle("Login");
+		frame.add(panel);
+		frame.setSize(new Dimension (400, 200));
+		
+		label = new JLabel ("Username");
+		label.setBounds(100, 8, 70, 20);
+		panel.add(label);
+		
+		username = new JTextField();
+		username.setBounds(100, 27, 193, 28);;
+		panel.add(username);
+		
+		passwordLabel = new JLabel("Password");
+		passwordLabel.setBounds(100, 55, 70, 20);
+		panel.add(passwordLabel);
+		
+		password = new JPasswordField();
+		password.setBounds(100, 75, 193, 28);
+		panel.add(password);
+		
+		button = new JButton("Login");
+		button.setBounds(100, 110, 90, 25);
+		button.addActionListener(this);
+		panel.add(button);
+		
+		frame.setVisible(true);
+	
 //
 //		north.add(strategyList);
 //
@@ -253,6 +292,18 @@ public class MainUI extends JFrame implements ActionListener {
 			int selectedRow = table.getSelectedRow();
 			if (selectedRow != -1)
 				dtm.removeRow(selectedRow); // connect to remove the selected row data from here (THIS IS PERFORMED AFTER TRADE BUTTON HIT)
+		} else if ("login".equals(command)) {
+			LogIn database = new LogIn();
+			
+			String user = username.getText();
+			String pass = password.getText();
+			
+			if (database.verify(user, pass)) {
+				JOptionPane.showMessageDialog(null,  "Login Successful");
+			}
+			else {
+				System.exit(1);
+			}
 		}
 	}
 
