@@ -33,8 +33,7 @@ import cryptoTrader.utils.ExecuteTrade;
 import cryptoTrader.utils.UserSelection;
 
 import javax.swing.JTextField;
-
-import cryptoTrader.utils.DataVisualizationCreator;
+import javax.swing.JLabel;
 
 public class MainUI extends JFrame implements ActionListener {
 	/**
@@ -162,25 +161,7 @@ public class MainUI extends JFrame implements ActionListener {
 		JLabel lblNewLabel = new JLabel("Enter Broker Name:");
 		east.add(lblNewLabel);
 		
-		Name = new JTextField();
-		east.add(Name);
-		Name.setColumns(10);
-		
-		JLabel lblNewLabel_1 = new JLabel("Enter Coin(s):");
-		east.add(lblNewLabel_1);
-		
-		Coin = new JTextField();
-		east.add(Coin);
-		Coin.setColumns(10);
-		
-		JLabel lblNewLabel_2 = new JLabel("Enter Strategy:");
-		east.add(lblNewLabel_2);
-		
-		Strategy = new JTextField();
-		east.add(Strategy);
-		Strategy.setColumns(10);
-		Strategy.setText("Strategy-");
-		
+	
 		JPanel buttons = new JPanel();
 		buttons.setLayout(new BoxLayout(buttons, BoxLayout.X_AXIS));
 		buttons.add(addRow);
@@ -210,6 +191,7 @@ public class MainUI extends JFrame implements ActionListener {
 	}
 
 	public static void main(String[] args) {
+		
 		JFrame frame = MainUI.getInstance();
 		frame.setSize(900, 600);
 		frame.pack();
@@ -240,20 +222,48 @@ public class MainUI extends JFrame implements ActionListener {
 					}
 					String strategyName = strategyObject.toString(); // strategy name string
 					System.out.println(traderName + " " + Arrays.toString(coinNames) + " " + strategyName); // could use here to make selection object
-	        }
+					brokerDatabase.addBroker(traderName, strategyName, coinNames);
+			}
+			
 			cumulativeTrades.performTrade(brokerDatabase);
+			
 			stats.removeAll();
 			DataVisualizationCreator creator = new DataVisualizationCreator();
+		// ---------------- TESTING PURPOSES ONLY (TO DELETE FOR FINAL PRODUCT) -------------------------
+			List<List<String>> tableList = new ArrayList<List<String>>();
+			List<String> tradeData = new ArrayList<String>();
+			tradeData.add("taylor");
+			tradeData.add("strategy-a");
+			tradeData.add("buy");
+			tradeData.add("BTC");
+			tradeData.add("300");
+			tradeData.add("1.00");
+			tradeData.add("03-06-2002");
+			tableList.add(tradeData);
+			
+			List<List<String>> histoList = new ArrayList<List<String>>();
+			List<String> freqData = new ArrayList<String>();
+			freqData.add("6");
+			freqData.add("Trader-1");
+			freqData.add("Strategy-A");
+			histoList.add(freqData);
+			
+			List<String> freqData2 = new ArrayList<String>();
+			freqData2.add("5");
+			freqData2.add("Trader-2");
+			freqData2.add("Strategy-B");
+			histoList.add(freqData2);
+			
 			creator.createCharts(cumulativeTrades.getCumulativeTrades(), histoList);
+		// ---------------------------------------------------------------
+ 		//	creator.createCharts(cumulativeTrades.getCumulativeTrades());
 		} else if ("addTableRow".equals(command)) {
-			String[] coinList = Coin.getText().split(",");
-			String[] newRow = {Name.getText(), Coin.getText(), Strategy.getText()};
-			brokerDatabase.addBroker(newRow[0], newRow[2], coinList);
-			dtm.addRow(newRow); 
+			dtm.addRow(new String[3]); 
 		} else if ("remTableRow".equals(command)) {
 			int selectedRow = table.getSelectedRow();
-			if (selectedRow != -1)
+			if (selectedRow != -1) {
 				dtm.removeRow(selectedRow); // connect to remove the selected row data from here (THIS IS PERFORMED AFTER TRADE BUTTON HIT)
+			}
 		}
 	}
 
