@@ -58,9 +58,6 @@ public class MainUI extends JFrame implements ActionListener {
 	private String selectedStrategy = "";
 	private DefaultTableModel dtm;
 	private JTable table;
-	private JTextField Name;
-	private JTextField Coin;
-	private JTextField Strategy;
 	
 	//trading platform frame
 	private static JFrame frame = new JFrame();
