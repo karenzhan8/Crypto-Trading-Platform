@@ -14,6 +14,9 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
+/**
+ * class to get list of available crypto
+ */
 public class AvailableCryptoList {
 	private static AvailableCryptoList instance = null;
 	
@@ -21,6 +24,9 @@ public class AvailableCryptoList {
 	
 	private List<String> availableCryptosList = new ArrayList<>();
 	
+	/**
+	 * Creates a global point of access to AvailableCryptoList using singleton design pattern  
+	 */
 	public static AvailableCryptoList getInstance() {
 		if (instance == null)
 			instance = new AvailableCryptoList();
@@ -28,10 +34,16 @@ public class AvailableCryptoList {
 		return instance;
 	}
 	
+	/**
+	 * calls findAvailableCryptos()
+	 */
 	private AvailableCryptoList() {
 		findAvailableCryptos();
 	}
 	
+	/**
+	 * trys to connect to URL and throws IOException if not
+	 */
 	public void call() {
 		String urlString = "https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=IBM&apikey=VNEY4VV2AWF1EB51";
 		try {
@@ -67,6 +79,9 @@ public class AvailableCryptoList {
 		}
 	}
 	
+	/**
+	 * gets available crypto data
+	 */
 	private void findAvailableCryptos() {
 
 		String urlString = 
@@ -108,10 +123,19 @@ public class AvailableCryptoList {
 		}
 	}
 	
+	/**
+	 * returns an array of available crypto
+	 * @return array of available crypto
+	 */
 	public String[] getAvailableCryptos() {
 		return availableCryptosList.toArray(new String[availableCryptosList.size()]);
 	}
 	
+	/**
+	 * returns coin if it is available
+	 * @param coinList	array of coins
+	 * @return		coin only if it is available or else returns null
+	 */
 	public String coinAvailable(String[] coinList) {
 		
 		String[] availableCoins = availableCryptosList.toArray(new String[availableCryptosList.size()]);
@@ -125,7 +149,11 @@ public class AvailableCryptoList {
 		return null;
 	}
 	
-	
+	/**
+	 * returns crypto ID from given ticker
+	 * @param tickerName	name of the ticker
+	 * @return	crypto ID
+	 */
 	public String getCryptoIDfromTicker(String tickerName) {
 		return tickerIDMap.get(tickerName.toLowerCase());
 	}
