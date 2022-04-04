@@ -126,7 +126,7 @@ public class MainUI extends JFrame implements ActionListener {
 		
 		south.add(trade);
 
-		dtm = new DefaultTableModel(new Object[] { "Trading Client", "Coin List", "Strategy Name" }, 1);
+		dtm = new DefaultTableModel(new Object[] { "Trading Client", "Coin List", "Strategy Name" }, 0);
 		table = new JTable(dtm);
 		// table.setPreferredSize(new Dimension(600, 300));
 		JScrollPane scrollPane = new JScrollPane(table);
