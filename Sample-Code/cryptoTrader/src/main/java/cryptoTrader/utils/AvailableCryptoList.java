@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -16,7 +17,8 @@ import com.google.gson.JsonParser;
 public class AvailableCryptoList {
 	private static AvailableCryptoList instance = null;
 	
-	private Map<String, String> availableCryptosMap = new HashMap<>();
+	private Map<String, String> tickerIDMap = new HashMap<>();
+	
 	private List<String> availableCryptosList = new ArrayList<>();
 	
 	public static AvailableCryptoList getInstance() {
@@ -87,14 +89,17 @@ public class AvailableCryptoList {
 				JsonArray jsonArray = new JsonParser().parse(inline).getAsJsonArray();
 				int size = jsonArray.size();
 				
-				String name, id;
+				String name, id, symbol;
 				for (int i = 0; i < size; i++) {
 					JsonObject object = jsonArray.get(i).getAsJsonObject();
 					name = object.get("name").getAsString();
 					id = object.get("id").getAsString();
+					symbol = object.get("symbol").getAsString();
+				
 					
-					availableCryptosMap.put(name, id);
-					availableCryptosList.add(name);
+					tickerIDMap.put(symbol, id);
+					
+					availableCryptosList.add(symbol);
 				}
 			}
 
@@ -107,8 +112,23 @@ public class AvailableCryptoList {
 		return availableCryptosList.toArray(new String[availableCryptosList.size()]);
 	}
 	
-	public String getCryptoID(String cryptoName) {
-		return availableCryptosMap.get(cryptoName);
+	public String coinAvailable(String[] coinList) {
+		
+		String[] availableCoins = availableCryptosList.toArray(new String[availableCryptosList.size()]);
+		
+		for (int i=0; i < coinList.length; i++) {
+			if (!Arrays.asList(availableCoins).contains(coinList[i].toLowerCase())) {
+				return coinList[i];
+			}
+		}
+		
+		return null;
 	}
+	
+	
+	public String getCryptoIDfromTicker(String tickerName) {
+		return tickerIDMap.get(tickerName.toLowerCase());
+	}
+	
 
 }
