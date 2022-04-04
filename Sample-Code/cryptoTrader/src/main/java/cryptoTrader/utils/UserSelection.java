@@ -11,6 +11,7 @@ public class UserSelection {
 	private ArrayList<String> strategyList;
 	private ArrayList<String[]> coinsList;
 	private int numBrokers;
+	private ArrayList<Integer> freqList;
 	
 	/**
 	 * Constructor class
@@ -21,6 +22,7 @@ public class UserSelection {
 		strategyList = new ArrayList<String>();
 		coinsList = new ArrayList<String[]>();
 		numBrokers = 0;
+		freqList = new ArrayList<Integer>();
 	}
 		/**
 	 * Adds broker and updates numBrokers or prints message indicating that broker is already in list
@@ -38,6 +40,25 @@ public class UserSelection {
 			numBrokers++;
 	        	coinsList.add(coinList);
 		} else {
+			//System.out.println("Broker already in list");
+			int index = brokerList.indexOf(name);
+			int value = freqList.get(index);
+			value++;
+			freqList.set(index, value);
+		}
+	}
+	
+	public void addBroker(String name, String strategy, String[] coinList, int freq) {
+		if (!brokerList.contains(name)) { //if broker is not in list yet
+			
+			Broker newBroker = new Broker(name, strategy, coinList);
+			
+			brokerList.add(newBroker);
+			strategyList.add(strategy);
+			numBrokers++;
+	        	coinsList.add(coinList);
+	        	freqList.add(freq);
+		} else {
 			System.out.println("Broker already in list");
 		}
 	}
@@ -53,11 +74,13 @@ public class UserSelection {
 			coinsList.remove(index);
 			brokerList.remove(index);
 			numBrokers--;
+			freqList.removie(index)
 		} else {
 			System.out.println("Broker not in list");
 		}
 	}
 
+	
 	/**
 	 * getter class for brokerList
 	 * @return brokerList
@@ -88,6 +111,10 @@ public class UserSelection {
      */
     public int getNumBrokers() {
 	    return numBrokers;
+    }
+	
+    public ArrayList<Integer> getFreqList(){
+    	return freqList;
     }
     
 	/**
