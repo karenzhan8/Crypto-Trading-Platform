@@ -1,4 +1,4 @@
-package gui;
+package cryptoTrader.gui;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
