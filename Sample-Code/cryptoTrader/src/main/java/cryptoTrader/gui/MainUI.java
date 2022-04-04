@@ -220,6 +220,10 @@ public class MainUI extends JFrame implements ActionListener {
 						return;
 					}
 					String[] coinNames = coinObject.toString().split(","); // list of coins
+					// ensures AvailableCryptoList can properly read the ticker symbol
+					for (int i=0; i < coinNames.length; i++) {
+						coinNames[i].trim();
+					}
 					Object strategyObject = dtm.getValueAt(count, 2);
 					if (strategyObject == null) {
 						JOptionPane.showMessageDialog(this, "please fill in strategy name on line " + (count + 1) );
