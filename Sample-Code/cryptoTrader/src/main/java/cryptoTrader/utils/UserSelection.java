@@ -17,6 +17,7 @@ public class UserSelection {
 	
 	public void addBroker(String name, String strategy, String[] coinList) {
 		if (!brokerList.contains(name)) { //if broker is not in list yet
+			
 			Broker newBroker = new Broker(name, strategy, coinList);
 			
 			brokerList.add(newBroker);
@@ -53,6 +54,16 @@ public class UserSelection {
 	
     public int getNumBrokers() {
 	    return numBrokers;
-    }    
+    }
+    
+    public String inDatabase(String name) {
+    	
+    	if (brokerList.contains(name)) {
+    		return name;
+    	} else {
+    		return null;
+    	}
+    	
+    }
 	    
 }
