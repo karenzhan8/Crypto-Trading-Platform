@@ -263,7 +263,10 @@ public class MainUI extends JFrame implements ActionListener {
 			cumulativeTrades.performTrade(brokerDatabase);
 			stats.removeAll();
 			DataVisualizationCreator creator = new DataVisualizationCreator();
-			//creator.createCharts(cumulativeTrades.getCumulativeTrades(), histoList);
+			
+			List<List<String>> histoList = new ArrayList<List<String>>();
+			creator.createCharts(cumulativeTrades.getCumulativeTrades(), histoList);
+			
 		} else if ("addTableRow".equals(command)) {
 			dtm.addRow(new String[3]); 
 		} else if ("remTableRow".equals(command)) {
