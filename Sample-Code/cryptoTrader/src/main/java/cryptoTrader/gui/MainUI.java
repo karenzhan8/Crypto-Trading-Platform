@@ -67,6 +67,8 @@ public class MainUI extends JFrame implements ActionListener {
 	private JTextField Coin;
 	private JTextField Strategy;
 	
+	private static JFrame frame = new JFrame();
+	private static JFrame loginFrame = new JFrame();
 	private static JLabel passwordLabel, label;
 	private static JTextField username;
 	private static JPasswordField password;
@@ -97,10 +99,9 @@ public class MainUI extends JFrame implements ActionListener {
 		JPanel panel = new JPanel();
 		panel.setLayout(null);
 		
-		JFrame frame = new JFrame();
-		frame.setTitle("Login");
-		frame.add(panel);
-		frame.setSize(new Dimension (400, 200));
+		loginFrame.setTitle("Login");
+		loginFrame.add(panel);
+		loginFrame.setSize(new Dimension (400, 200));
 		
 		label = new JLabel ("Username");
 		label.setBounds(100, 8, 70, 20);
@@ -123,7 +124,9 @@ public class MainUI extends JFrame implements ActionListener {
 		button.addActionListener(this);
 		panel.add(button);
 		
-		frame.setVisible(true);
+		loginFrame.setLocationRelativeTo(null);
+		loginFrame.setVisible(true);
+		loginFrame.setAlwaysOnTop(true);
 	
 //
 //		north.add(strategyList);
@@ -249,7 +252,7 @@ public class MainUI extends JFrame implements ActionListener {
 	}
 
 	public static void main(String[] args) {
-		JFrame frame = MainUI.getInstance();
+		frame = MainUI.getInstance();
 		frame.setSize(900, 600);
 		frame.pack();
 		frame.setVisible(true);
@@ -283,7 +286,7 @@ public class MainUI extends JFrame implements ActionListener {
 			cumulativeTrades.performTrade(brokerDatabase);
 			stats.removeAll();
 			DataVisualizationCreator creator = new DataVisualizationCreator();
-			creator.createCharts(cumulativeTrades.getCumulativeTrades(), histoList);
+			//creator.createCharts(cumulativeTrades.getCumulativeTrades(), histoList);
 		} else if ("addTableRow".equals(command)) {
 			String[] coinList = Coin.getText().split(",");
 			String[] newRow = {Name.getText(), Coin.getText(), Strategy.getText()};
@@ -294,16 +297,22 @@ public class MainUI extends JFrame implements ActionListener {
 			if (selectedRow != -1) {
 				dtm.removeRow(selectedRow); // connect to remove the selected row data from here (THIS IS PERFORMED AFTER TRADE BUTTON HIT)
 			}
-		} else if ("login".equals(command)) {
+		} else if ("Login".equals(command)) {
+			//verify that user credentials are correct
 			LogIn database = new LogIn();
 			
 			String user = username.getText();
 			String pass = password.getText();
 			
+			//if credentials valid, hide log in panel from user
 			if (database.verify(user, pass)) {
-				JOptionPane.showMessageDialog(null,  "Login Successful");
+				loginFrame.setVisible(false);
 			}
+			
+			//if credentials invalid, close system and exit system
 			else {
+				frame.setVisible(false);
+				loginFrame.setVisible(false);
 				System.exit(1);
 			}
 		}
