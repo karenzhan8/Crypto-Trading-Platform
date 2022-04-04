@@ -30,15 +30,13 @@ import javax.swing.border.TitledBorder;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
 
-import utils.DataVisualizationCreator;
-import utils.ExecuteTrade;
-import utils.LogIn;
-import utils.UserSelection;
+import cryptoTrader.utils.DataVisualizationCreator;
+import cryptoTrader.utils.ExecuteTrade;
+import cryptoTrader.utils.LogIn;
+import cryptoTrader.utils.UserSelection;
 
 import javax.swing.JTextField;
 import javax.swing.JLabel;
-
-import utils.DataVisualizationCreator;
 
 public class MainUI extends JFrame implements ActionListener {
 	private static final long serialVersionUID = 1L;
